@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spesa Sana — La spesa stagionale su misura per te</title>
+<meta name="description" content="Segui la tua dieta con ingredienti freschi, locali e stagionali. Spesa Sana ti crea una lista personalizzata ogni settimana. Gratis!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #2D6A4F;
+  --green-dark: #1B4332;
+  --green-mid: #40916C;
+  --green-light: #74C69D;
+  --green-pale: #D8F3DC;
+  --orange: #F4845F;
+  --orange-pale: #FFF0EB;
+  --cream: #FDFAF5;
+  --warm: #F5F0E8;
+  --text: #1A1A1A;
+  --text-mid: #4A5568;
+  --text-light: #8A9AB0;
+  --white: #ffffff;
+  --gold: #E9B84A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s ease;
+}
+
+nav.scrolled {
+  background: rgba(253,250,245,0.95);
+  backdrop-filter: blur(16px);
+  padding: 14px 48px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+.logo {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-leaf { font-size: 20px; }
+
+.nav-cta {
+  background: var(--green);
+  color: var(--white);
+  padding: 11px 24px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.nav-cta:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45,106,79,0.3);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Background blobs */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(116,198,157,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-blob2 {
+  position: absolute;
+  bottom: -10%; left: -5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(244,132,95,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-blob3 {
+  position: absolute;
+  top: 30%; left: 20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 780px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  border: 1px solid rgba(45,106,79,0.15);
+  animation: fadeDown 0.8s ease both;
+}
+
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.hero-subtitle {
+  font-family: 'Lora', serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-style: italic;
+  color: var(--green-mid);
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-pitch {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 620px;
+  margin: 0 auto 40px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.hero-pitch strong { color: var(--green); font-weight: 700; }
+.hero-pitch em { color: var(--orange); font-style: normal; font-weight: 700; }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+
+.btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green);
+  color: var(--white);
+  padding: 17px 36px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 24px rgba(45,106,79,0.35);
+  letter-spacing: 0.02em;
+}
+
+.btn-main:hover {
+  background: var(--green-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(45,106,79,0.4);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green);
+  padding: 17px 28px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid rgba(45,106,79,0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--green-pale);
+  border-color: var(--green);
+}
+
+/* HERO STATS */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  animation: fadeIn 1s 0.7s ease both;
+}
+
+.hero-stat {
+  padding: 0 32px;
+  text-align: center;
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.hero-stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Lora', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--green-dark);
+  display: block;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 1s 1s ease both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--green), transparent);
+  animation: scrollDown 1.5s ease infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.scroll-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ── PROBLEM SECTION ── */
+.problem-section {
+  background: var(--green-dark);
+  padding: 100px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.problem-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(116,198,157,0.15) 0%, transparent 70%);
+}
+
+.problem-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+}
+
+.section-tag::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: currentColor;
+}
+
+.problem-tag { color: var(--orange); }
+
+.problem-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.problem-title em {
+  font-style: italic;
+  color: var(--green-light);
+}
+
+.problem-desc {
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.75;
+}
+
+.problem-desc strong {
+  color: var(--white);
+}
+
+.problems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.problem-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.problem-item:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateX(4px);
+}
+
+.problem-emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.problem-text-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.problem-text-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+/* ── SOLUTION SECTION ── */
+.solution-section {
+  padding: 100px 48px;
+  background: var(--cream);
+  position: relative;
+}
+
+.solution-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.solution-tag { color: var(--green); }
+
+.solution-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--green-dark);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.solution-title em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.solution-desc {
+  font-size: 18px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto 64px;
+}
+
+/* STEPS */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.step-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 36px 28px;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.08);
+}
+
+.step-number {
+  font-family: 'Lora', serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--green-pale);
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.step-emoji {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.step-title {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+
+.step-desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ARROW between steps */
+.step-arrow {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: var(--green-light);
+  z-index: 1;
+}
+
+/* ── BONUS SECTION ── */
+.bonus-section {
+  background: var(--warm);
+  padding: 80px 48px;
+}
+
+.bonus-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bonus-card {
+  background: var(--green);
+  border-radius: 28px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bonus-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+}
+
+.bonus-tag { color: var(--gold); }
+.bonus-tag::before { background: var(--gold); }
+
+.bonus-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.bonus-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.bonus-desc {
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.bonus-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bonus-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.9);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bonus-feature-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* EMAIL PREVIEW */
+.email-preview {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+}
+
+.email-topbar {
+  background: #F5F5F5;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.email-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.ed-red { background: #FF5F57; }
+.ed-yellow { background: #FFBD2E; }
+.ed-green { background: #28CA41; }
+
+.email-body {
+  padding: 20px;
+}
+
+.email-from {
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.email-subject {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.email-greeting {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 12px;
+}
+
+.email-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.email-item-green {
+  background: var(--green-pale);
+  color: var(--green-dark);
+}
+
+.email-item-orange {
+  background: var(--orange-pale);
+  color: var(--orange);
+}
+
+.email-footer-text {
+  font-size: 11px;
+  color: #999;
+  margin-top: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── DIETS SECTION ── */
+.diets-section {
+  padding: 100px 48px;
+  background: var(--cream);
+}
+
+.diets-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.diets-tag { color: var(--green); }
+
+.diets-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 16px;
+}
+
+.diets-title em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.diets-desc {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 500px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.diets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.diet-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 28px 24px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.diet-card:hover {
+  border-color: var(--green);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(45,106,79,0.1);
+}
+
+.diet-emoji {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.diet-name {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+
+.diet-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.regions-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--green-pale);
+  padding: 16px 28px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 120px 48px;
+  background: var(--green-dark);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(116,198,157,0.15) 0%, transparent 65%);
+}
+
+.cta-tag { color: var(--gold); }
+.cta-tag::before { background: var(--gold); }
+
+.cta-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.cta-title em {
+  font-style: italic;
+  color: var(--green-light);
+}
+
+.cta-desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.btn-cta-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--orange);
+  color: var(--white);
+  padding: 18px 40px;
+  border-radius: 100px;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 28px rgba(244,132,95,0.4);
+}
+
+.btn-cta-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(244,132,95,0.5);
+}
+
+.btn-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.8);
+  padding: 18px 32px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-cta-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  color: var(--white);
+}
+
+.cta-note {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  position: relative;
+}
+
+.cta-note strong { color: rgba(255,255,255,0.7); }
+
+/* ── FOOTER ── */
+footer {
+  background: #0D2B1E;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-logo {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  width: 100%;
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: all 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .hero { padding: 100px 24px 80px; }
+  .problem-inner { grid-template-columns: 1fr; gap: 48px; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step-arrow { display: none; }
+  .bonus-card { grid-template-columns: 1fr; gap: 40px; padding: 36px 28px; }
+  .diets-grid { grid-template-columns: 1fr 1fr; }
+  section, .problem-section, .solution-section, .bonus-section, .diets-section, .cta-section { padding: 80px 24px; }
+  footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .hero-stats { flex-direction: column; gap: 16px; }
+  .hero-stat { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); padding: 16px 0; width: 100%; }
+  .hero-stat:last-child { border-bottom: none; }
+  .diets-grid { grid-template-columns: 1fr; }
+  .footer-links { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <span class="logo-leaf">🌿</span>
+    SpesaSana
+  </a>
+  <a href="https://spesa-sana-hub.base44.app" target="_blank" class="nav-cta">
+    Prova Gratis →
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob2"></div>
+  <div class="hero-blob3"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      🇮🇹 100% Gratuita — Nessuna carta richiesta
+    </div>
+
+    <h1 class="hero-title">
+      Tutti lo dicono.<br>
+      <em>Pochi lo fanno davvero.</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      Mangiare fresco, locale e stagionale.
+    </p>
+
+    <p class="hero-pitch">
+      Sì, lo sappiamo. <strong>La dieta sana, il cibo fresco, i prodotti locali</strong> — tutti concordano che sia la scelta giusta. Ma quando arrivi al supermercato o al mercato rionale... <em>come fai a ricordare tutto?</em><br><br>
+      Spesa Sana risolve questo. Inserisci la tua dieta, la tua regione e la stagione — e ti appare <strong>la lista personalizzata di cosa comprare questa settimana.</strong>
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://spesa-sana-hub.base44.app" target="_blank" class="btn-main">
+        🛒 Crea la mia lista gratis
+      </a>
+      <a href="#come-funziona" class="btn-ghost">
+        Come funziona →
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">20</span>
+        <span class="stat-label">Regioni italiane</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Piani dieta</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Ingredienti</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">€0</span>
+        <span class="stat-label">Per sempre</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scopri</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="problem-inner">
+    <div class="reveal">
+      <div class="section-tag problem-tag">Il Problema</div>
+      <h2 class="problem-title">
+        Il cibo locale è <em>il migliore</em>.<br>
+        Ma chi lo ricorda?
+      </h2>
+      <p class="problem-desc">
+        Tutti sanno che mangiare stagionale e locale è meglio. <strong>Ma nella vita frenetica di ogni giorno</strong> è impossibile ricordare cosa è fresco, cosa è di stagione, cosa cresce nella tua regione in questo momento.
+      </p>
+    </div>
+
+    <div class="problems-list reveal reveal-delay-2">
+      <div class="problem-item">
+        <div class="problem-emoji">🍅</div>
+        <div>
+          <div class="problem-text-title">Pomodori a gennaio?</div>
+          <div class="problem-text-desc">Vengono dal Marocco. Costano il doppio. Sanno di niente.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-emoji">🗺️</div>
+        <div>
+          <div class="problem-text-title">20 regioni diverse</div>
+          <div class="problem-text-desc">Cosa è stagionale in Sicilia è diverso dal Trentino. Nessuna app lo sapeva.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-emoji">🥗</div>
+        <div>
+          <div class="problem-text-title">La tua dieta conta</div>
+          <div class="problem-text-desc">Mediterranea, vegana, low-carb — ogni dieta ha bisogno di ingredienti diversi.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-emoji">🧠</div>
+        <div>
+          <div class="problem-text-title">Impossibile ricordare tutto</div>
+          <div class="problem-text-desc">Stagione + regione + dieta = troppo da tenere a mente ogni settimana.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution-section" id="come-funziona">
+  <div class="solution-inner">
+    <div class="section-tag solution-tag reveal">La Soluzione</div>
+    <h2 class="solution-title reveal">
+      Tre informazioni.<br>
+      Una lista <em>perfetta.</em>
+    </h2>
+    <p class="solution-desc reveal">
+      Spesa Sana fa tutto il lavoro per te. In 30 secondi hai la lista di cosa comprare questa settimana.
+    </p>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <span class="step-number">01</span>
+        <span class="step-emoji">🥗</span>
+        <div class="step-title">Scegli la tua dieta</div>
+        <p class="step-desc">Mediterranea, Vegana, Vegetariana, Alto Proteico, Low-Carb o DASH. L'app si adatta a te.</p>
+        <span class="step-arrow">→</span>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <span class="step-number">02</span>
+        <span class="step-emoji">📍</span>
+        <div class="step-title">Inserisci la tua regione</div>
+        <p class="step-desc">Tutte e 20 le regioni italiane. Ogni regione ha i suoi prodotti tipici e stagionali.</p>
+        <span class="step-arrow">→</span>
+      </div>
+      <div class="step-card reveal reveal-delay-4">
+        <span class="step-number">03</span>
+        <span class="step-emoji">✨</span>
+        <div class="step-title">Ecco la tua lista!</div>
+        <p class="step-desc">La tua lista personalizzata appare subito. Ingredienti freschi, locali e stagionali. Pronti per la spesa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS EMAIL -->
+<section class="bonus-section">
+  <div class="bonus-inner">
+    <div class="bonus-card reveal">
+      <div>
+        <div class="section-tag bonus-tag">Bonus Gratuito</div>
+        <h2 class="bonus-title">
+          La tua lista arriva
+          <em>direttamente</em><br>
+          nella tua email
+        </h2>
+        <p class="bonus-desc">
+          Ogni sabato e giovedì mattina ricevi automaticamente la tua lista stagionale personalizzata via email. Apri, vai a fare la spesa, fine.
+        </p>
+        <div class="bonus-features">
+          <div class="bonus-feature">
+            <div class="bonus-feature-icon">📅</div>
+            Sabato 8:30 — pronti per il mercato
+          </div>
+          <div class="bonus-feature">
+            <div class="bonus-feature-icon">📅</div>
+            Giovedì 8:00 — pianifica il weekend
+          </div>
+          <div class="bonus-feature">
+            <div class="bonus-feature-icon">🌸</div>
+            Email speciale ad ogni cambio stagione
+          </div>
+          <div class="bonus-feature">
+            <div class="bonus-feature-icon">🎯</div>
+            Sempre personalizzata per la tua regione
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL MOCKUP -->
+      <div class="email-preview">
+        <div class="email-topbar">
+          <div class="email-dot ed-red"></div>
+          <div class="email-dot ed-yellow"></div>
+          <div class="email-dot ed-green"></div>
+        </div>
+        <div class="email-body">
+          <div class="email-from">da: lista@spesasana.it</div>
+          <div class="email-subject">🌿 La tua spesa di sabato — Estate • Toscana</div>
+          <div class="email-greeting">Ciao! Questa settimana in Toscana trovi:</div>
+          <div class="email-item email-item-green">✅ Pomodori cuore di bue — stagionale</div>
+          <div class="email-item email-item-green">✅ Melanzane — stagionale</div>
+          <div class="email-item email-item-orange">📍 Olio EVO DOP — locale toscano</div>
+          <div class="email-item email-item-green">✅ Zucchine — stagionale</div>
+          <div class="email-item email-item-orange">📍 Pecorino toscano — locale</div>
+          <div class="email-item email-item-green">✅ Pesche — stagionale</div>
+          <div class="email-footer-text">Generata con Spesa Sana 🌿 — spesa-sana-hub.base44.app</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIETS -->
+<section class="diets-section">
+  <div class="diets-inner">
+    <div class="section-tag diets-tag reveal">Le Diete</div>
+    <h2 class="diets-title reveal">
+      Funziona con <em>ogni dieta</em>
+    </h2>
+    <p class="diets-desc reveal">
+      Che tu segua la dieta mediterranea o sia vegano, Spesa Sana si adatta perfettamente.
+    </p>
+
+    <div class="diets-grid">
+      <div class="diet-card reveal">
+        <span class="diet-emoji">🫒</span>
+        <div class="diet-name">Mediterranea</div>
+        <div class="diet-desc">La dieta italiana per eccellenza. Olio EVO, verdure fresche, pesce e legumi.</div>
+      </div>
+      <div class="diet-card reveal reveal-delay-1">
+        <span class="diet-emoji">🌱</span>
+        <div class="diet-name">Vegana</div>
+        <div class="diet-desc">100% vegetale. Solo ingredienti freschi stagionali di origine vegetale.</div>
+      </div>
+      <div class="diet-card reveal reveal-delay-2">
+        <span class="diet-emoji">🥦</span>
+        <div class="diet-name">Vegetariana</div>
+        <div class="diet-desc">Verdure, frutta, latticini e uova. Il meglio della stagione.</div>
+      </div>
+      <div class="diet-card reveal reveal-delay-1">
+        <span class="diet-emoji">💪</span>
+        <div class="diet-name">Alto Proteico</div>
+        <div class="diet-desc">Proteine magre, legumi e verdure. Per chi allena il corpo.</div>
+      </div>
+      <div class="diet-card reveal reveal-delay-2">
+        <span class="diet-emoji">🥗</span>
+        <div class="diet-name">Low-Carb</div>
+        <div class="diet-desc">Pochi carboidrati, tante verdure e proteine. Stagionale e bilanciato.</div>
+      </div>
+      <div class="diet-card reveal reveal-delay-3">
+        <span class="diet-emoji">❤️</span>
+        <div class="diet-name">DASH</div>
+        <div class="diet-desc">Per la salute del cuore. Verdure, frutta e pochi grassi saturi.</div>
+      </div>
+    </div>
+
+    <div class="regions-note reveal">
+      🗺️ Disponibile per tutte le 20 regioni italiane
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-tag cta-tag reveal" style="justify-content:center;display:inline-flex;">Inizia Ora</div>
+  <h2 class="cta-title reveal">
+    La spesa sana inizia<br>
+    con <em>un solo tap</em>
+  </h2>
+  <p class="cta-desc reveal">
+    Completamente gratuita. Nessuna carta di credito. Nessun abbonamento. Solo la tua lista perfetta ogni settimana.
+  </p>
+  <div class="cta-buttons reveal">
+    <a href="https://spesa-sana-hub.base44.app" target="_blank" class="btn-cta-main">
+      🌿 Crea la mia lista gratis
+    </a>
+    <a href="https://spesa-sana-hub.base44.app" target="_blank" class="btn-cta-ghost">
+      📱 Apri nel browser
+    </a>
+  </div>
+  <p class="cta-note reveal">
+    <strong>100% gratuita</strong> · 🇮🇹 Made in Italy · 🔒 Privacy garantita · No spam
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">🌿 SpesaSana</div>
+    <div class="footer-tagline">Fresco. Locale. Stagionale.</div>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/termini-servizio">Termini di Servizio</a>
+    <a href="/cookie-policy">Cookie Policy</a>
+    <a href="mailto:info@spesasana.it">Contatti</a>
+  </div>
+  <div class="footer-copy">
+    © 2026 Spesa Sana. Tutti i diritti riservati. 🇮🇹 — 
+    Spesa Sana partecipa ai programmi di affiliazione Amazon Associates e Cortilia.
+  </div>
+</footer>
+
+<script>
+  // NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // REVEAL ON SCROLL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
